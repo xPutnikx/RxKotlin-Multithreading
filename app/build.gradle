@@ -1,0 +1,73 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    def globalDependencies = rootProject.ext.globalDependencies
+
+    kapt globalDependencies.dataBinding
+    kapt globalDependencies.daggerCompiler
+
+    compile globalDependencies.kotlin
+    compile globalDependencies.dagger
+    compile globalDependencies.recyclerView
+    compile globalDependencies.rxJava
+    compile globalDependencies.rxAndroid
+    compile globalDependencies.timber
+    compile globalDependencies.glide
+    compile globalDependencies.rxlifecycle
+    compile globalDependencies.rxlifecycleComponent
+
+    def testDependencies = rootProject.ext.androidTestDependencies
+    testCompile testDependencies.supportAnnotations
+    testCompile testDependencies.junit
+    testCompile testDependencies.kotlinTest
+    testCompile testDependencies.kotlinTestJUnit
+}
