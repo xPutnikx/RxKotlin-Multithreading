@@ -4,17 +4,19 @@ apply from: 'buildsystem/dependencies.gradle'
 buildscript {
     repositories {
         jcenter()
+      google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.4"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:1.0.3"
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.10'
+        classpath 'org.jetbrains.kotlin:kotlin-android-extensions:1.2.10'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+      google()
     }
 
     ext {

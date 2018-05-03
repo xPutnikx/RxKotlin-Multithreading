@@ -31,10 +31,6 @@ android {
         test.java.srcDirs += 'src/test/kotlin'
     }
 
-    dataBinding {
-        enabled = true
-    }
-
     dexOptions {
         javaMaxHeapSize "4g"
         preDexLibraries true
